@@ -30,7 +30,7 @@ class DealerSeeder extends Seeder
         $dealer->phone = "0987654321";
         $dealer->email = "hung@gmail.com";
         $dealer->address = "Hà Nội";
-        $dealer->manager_name = "hung";
+        $dealer->manager_name = "Hung";
         $dealer->status_id = 1;
         $dealer->save();
 

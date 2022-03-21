@@ -17,7 +17,7 @@ class CreateDealersTable extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('name');
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('email');
             $table->string('address');
             $table->string('manager_name');

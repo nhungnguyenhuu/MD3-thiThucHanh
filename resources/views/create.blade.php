@@ -1,4 +1,4 @@
-<form action="{{route('dealer.store')}}">
+<form action="{{route('dealer.store')}}" method="post">
     @csrf
     <input type="text" name="code" placeholder="Nhập mã đại lý"><p></p>
     <p style="color: red">{{$errors->has('code')?$errors->first('code'):""}}</p>
@@ -18,7 +18,7 @@
 
     <select name="status_id" id="">
         @foreach($statuses as $status)
-        <option value="{{$status->name}}">{{$status->name}}</option>
+        <option value="{{$status->id}}">{{$status->name}}</option>
         @endforeach
     </select>
     <button>Create</button>

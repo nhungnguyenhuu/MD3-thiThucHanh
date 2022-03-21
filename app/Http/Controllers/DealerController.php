@@ -9,9 +9,14 @@ use Illuminate\Http\Request;
 
 class DealerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $dealers = Dealer::all();
+        if(isset($request->search)){
+            $dealers = $this->search($request->search);
+        }else{
+
+            $dealers = Dealer::all();
+        }
         return view('index', compact('dealers'));
     }
 
@@ -25,6 +30,34 @@ class DealerController extends Controller
     {
         $dealer = $request->except('_token');
         Dealer::create($dealer);
-        return redirect()->route('index');
+        return redirect()->route('dealer.index');
+    }
+
+    public function delete($id)
+    {
+       Dealer::destroy($id);
+       return redirect()->route('dealer.index');
+    }
+
+    public function edit($id)
+    {
+        $statuses =Status::all();
+        $dealer = Dealer::findOrFail($id);
+        return view('edit', compact('statuses', 'dealer' ));
+    }
+
+    public function update( DealerRequest $request)
+    {
+        $dealer = $request->except('_token');
+        Dealer::create($dealer);
+        return redirect()->route('dealer.index');
+    }
+
+    public function search($search)
+    {
+
+        return Dealer::where('name', 'like', "%$search%")->get();
+
+
     }
 }
